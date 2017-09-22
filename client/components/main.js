@@ -15,8 +15,8 @@ const Main = (props) => {
 
   return (
     <div>
-      <h1>BOILERMAKER</h1>
-      <nav>
+      <h1>FretBored</h1>
+      <nav className="navbar">
         {
           isLoggedIn
             ? <div>
@@ -26,7 +26,7 @@ const Main = (props) => {
             </div>
             : <div>
               {/* The navbar will show these links before you log in */}
-              <Link to='/login'>Login</Link>
+              <Link to='/login' >Login</Link>
               <Link to='/signup'>Sign Up</Link>
             </div>
         }

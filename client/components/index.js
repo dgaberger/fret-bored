@@ -5,4 +5,7 @@
  */
 export {default as Main} from './main'
 export {default as UserHome} from './user-home'
+export {default as FretBoard} from './fretboard'
+export {default as Tuners} from './tuners'
+
 export {Login, Signup} from './auth-form'
