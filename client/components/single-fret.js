@@ -13,7 +13,7 @@ const SingleFret = (props) => {
 	const SF = props.SF || []
 	const tuning = props.tuning || []
 	const noteVal = (tuning[6 - SF[0]] + SF[1]) % 12
-	const selected = props.selected || [0,2,3,5,7,8,10]
+	const selected = props.selected
 
 	const handleClick = (SF, tuning) => {
 		console.log('clicked note: ', noteVal)
@@ -28,7 +28,8 @@ const SingleFret = (props) => {
 
 const mapState = (state) => {
 	return {
-		tuning: state.tuning
+		tuning: state.tuning,
+		selected: state.selected
 	}
 }
 

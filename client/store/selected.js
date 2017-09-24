@@ -8,13 +8,13 @@ const EDIT_SELECTED = 'EDIT_SELECTED'
 /**
  * INITIAL STATE
  */
-const initSelected = []
+const initSelected = [] //[0,2,4,5,7,9,11]
 
 /**
  * ACTION CREATORS
  */
 export const getSelected = tuning => ({type: GET_SELECTED, tuning})
-export const toggleSelected = tuning => ({type: EDIT_SELECTED, tuning})
+export const editSelected = tuning => ({type: EDIT_SELECTED, tuning})
 
 /**
  * REDUCER

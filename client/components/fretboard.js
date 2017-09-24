@@ -38,9 +38,7 @@ export const FretBoard = (props) => {
 				<div className="col-xs-5">
 					<Tuners />
 					<div> 
-						{fretsArr.map((comp) => {
-							return comp
-						})}
+						{fretsArr.map((comp) => comp)}
 					</div>
 				</div>
 				<div className="col-xs-5">
