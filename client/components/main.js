@@ -16,6 +16,7 @@ const Main = (props) => {
   return (
     <div>
       <h1>FretBored</h1>
+      <h5>By David Berger - for Shawn Welch</h5>
       <nav className="navbar">
         {
           isLoggedIn
