@@ -8,7 +8,7 @@ const EDIT_SELECT_TYPE = 'EDIT_SELECT_TYPE'
 /**
  * INITIAL STATE
  */
-const initSelectType = ''
+const initSelectType = 'Scale'
 
 /**
  * ACTION CREATORS

@@ -1,15 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-const fretImg = "rosewood_bs.jpg"
-const selectedImg = "rosewood_sel.jpg"
-const rootImg = "rosewood_root.jpg"
+const fretImg = "nut_null.jpg"
+const selectedImg = "nut_sel.jpg"
+const rootImg = "nut_root.jpg"
 
 /**
  * COMPONENT
  */
-const SingleFret = (props) => {
-	const height = props.height || '200'
+const Nut = (props) => {
+	const height = props.height || '50'
 	const width = props.width || '40'
 	const SF = props.SF || []
 	const tuning = props.tuning || []
@@ -35,4 +35,4 @@ const mapState = (state) => {
 	}
 }
 
-export default connect(mapState)(SingleFret)
+export default connect(mapState)(Nut)

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {Button, ButtonGroup, ButtonToolbar} from 'react-bootstrap'
-import {editSelectType, editSelected} from '../store'
+import {Button, ButtonGroup, ToggleButton, ToggleButtonGroup, ButtonToolbar} from 'react-bootstrap'
+import {editSelectType, editSelected, toggleSelected, editMajMin} from '../store'
 
 /**
  * COMPONENT
@@ -12,16 +12,24 @@ const Controls = (props) => {
 	const g1 = notes.slice(0,4)
 	const g2 = notes.slice(4,8)
 	const g3 = notes.slice(8,12)
-	const {handleClick, handleType, selectType} = props
+	const {handleClick, handleType, selectType, handleMajMin, majmin} = props
 
 	return (
 		<div>
 			<label>Type:</label>
 			<ButtonToolbar>
 				<ButtonGroup>
-					<Button onClick={handleType} value={'Scale'}>Scale</Button>
-					<Button onClick={handleType} value={'Chord'}>Chord</Button>
-					<Button onClick={handleType} value={'Custom'}>Custom</Button>
+					<Button onClick={handleType} value={'Scale'} bsStyle="primary">Scale</Button>
+					<Button onClick={handleType} value={'Chord'} bsStyle="primary">Chord</Button>
+					<Button onClick={handleType} value={'Custom'} bsStyle="primary">Custom</Button>
+				</ButtonGroup>
+			</ButtonToolbar>
+
+			<label>Maj/Min</label>
+			<ButtonToolbar>
+				<ButtonGroup>
+					<Button onClick={handleMajMin} value="Major" bsStyle="info">Maj</Button>
+					<Button onClick={handleMajMin} value="Minor" bsStyle="info">Min</Button>
 				</ButtonGroup>
 			</ButtonToolbar>
 
@@ -34,7 +42,7 @@ const Controls = (props) => {
 								return (
 									<Button 
 										key={el[0]} 
-										onClick={(e)=>handleClick(el[0],el[1], selectType)}>
+										onClick={(e)=>handleClick(el[0],el[1], selectType, majmin)}>
 										{el[0]}
 									</Button>
 								)
@@ -50,25 +58,38 @@ const Controls = (props) => {
 const mapState = (state) => {
 	return {
 		tuning: state.tuning,
-		selectType: state.selectType
+		selectType: state.selectType,
+		majmin: state.majmin
 	}
 }
 
 const mapDispatch = (dispatch) => {
 	return {
-		handleClick(e, idx, selectType) {
-			console.log('clicked note',idx, selectType)
+		handleClick(e, idx, selectType, majmin) {
+			console.log('clicked note',idx, selectType, majmin)
+			let selected
 			switch (selectType) {
 			case 'Scale':
-				let selected = [0,2,4,5,7,9,11]
+				selected = majmin === 'Major' ? [0,2,4,5,7,9,11] : [0,2,3,5,7,8,10]
 				selected = selected.map(num => (num + +idx) % 12)
 				return dispatch(editSelected(selected))
+			case 'Chord':
+				selected = majmin === 'Major' ? [0,4,7] : [0,3,7]
+				selected = selected.map(num => (num + +idx) % 12)
+				return dispatch(editSelected(selected))
+			case 'Custom':
+				return dispatch(toggleSelected(idx))
 			default:
 				return null
 			}
 		},
 		handleType(e) {
+			dispatch(editSelected([]))
 			dispatch(editSelectType(e.target.value))
+		},
+		handleMajMin(e) {
+			dispatch(editSelected([]))
+			dispatch(editMajMin(e.target.value))
 		}
 	}
 }

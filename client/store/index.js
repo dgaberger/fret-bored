@@ -5,12 +5,14 @@ import user from './user'
 import tuning from './tuning'
 import selected from './selected'
 import selectType from './selectType'
+import majmin from './majmin'
 
 const reducer = combineReducers({
 	user,
 	tuning,
 	selected,
-	selectType
+	selectType,
+	majmin
 })
 
 const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -21,3 +23,4 @@ export * from './user'
 export * from './tuning'
 export * from './selected'
 export * from './selectType'
+export * from './majmin'
