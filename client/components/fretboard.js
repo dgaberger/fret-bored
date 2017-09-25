@@ -66,7 +66,8 @@ export const FretBoard = (props) => {
 
 const mapState = (state) => {
 	return {
-		tuning: state.tuning
+		tuning: state.tuning,
+		strings: state.strings
 	}
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {Button, ButtonGroup, ToggleButton, ToggleButtonGroup, ButtonToolbar} from 'react-bootstrap'
-import {editSelectType, editSelected, toggleSelected, editMajMin} from '../store'
+import {editSelectType, editSelected, toggleSelected, editMajMin, editStrings} from '../store'
 
 /**
  * COMPONENT
@@ -12,12 +12,24 @@ const Controls = (props) => {
 	const g1 = notes.slice(0,4)
 	const g2 = notes.slice(4,8)
 	const g3 = notes.slice(8,12)
-	const {handleClick, handleType, selectType, handleMajMin, majmin, selected} = props
+	const {handleClick, handleType, selectType, handleMajMin, handleStrings, majmin, selected, strings} = props
 	let notesSelected = selected.map(num => notesName[num])
 	notesSelected = notesSelected.join(', ')
 
 	return (
 		<div>
+			<label>Strings: {strings}</label>
+			<ButtonToolbar>
+				<ButtonGroup>
+					<Button onClick={handleStrings} value={1} bsStyle="primary">1</Button>
+					<Button onClick={handleStrings} value={2} bsStyle="primary">2</Button>
+					<Button onClick={handleStrings} value={3} bsStyle="primary">3</Button>
+					<Button onClick={handleStrings} value={4} bsStyle="primary">4</Button>
+					<Button onClick={handleStrings} value={5} bsStyle="primary">5</Button>
+					<Button onClick={handleStrings} value={6} bsStyle="primary">6</Button>
+				</ButtonGroup>
+			</ButtonToolbar>
+
 			<label>Type: {selectType}</label>
 			<ButtonToolbar>
 				<ButtonGroup>
@@ -62,7 +74,8 @@ const mapState = (state) => {
 		tuning: state.tuning,
 		selectType: state.selectType,
 		majmin: state.majmin,
-		selected: state.selected
+		selected: state.selected,
+		strings: state.strings
 	}
 }
 
@@ -89,6 +102,10 @@ const mapDispatch = (dispatch) => {
 		handleType(e) {
 			dispatch(editSelected([]))
 			dispatch(editSelectType(e.target.value))
+		},
+		handleStrings(e) {
+			dispatch(editSelected([]))
+			dispatch(editStrings(e.target.value))
 		},
 		handleMajMin(e) {
 			dispatch(editSelected([]))

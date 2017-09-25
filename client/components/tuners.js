@@ -9,10 +9,11 @@ const Tuner = (props) => {
 	const width = props.width || 40
 	const tuning = props.tuning || []
 	const string = props.string || 1
+	const strings = props.strings || 6
 	const handleChange = props.handler
 
 	return (
-		<select onChange={(e) => handleChange(e, string, tuning)} style={{width: width}} defaultValue={tuning[string - 1]} >
+		<select onChange={(e) => handleChange(e, string, tuning, strings)} style={{width: width}} defaultValue={tuning[strings - string]} >
 			<option value="0">A</option>
 			<option value="1">Bb/A#</option>
 			<option value="2">B</option>
@@ -35,8 +36,8 @@ export const Tuners = (props) => {
 	const handleChange = props.handleChange
 
 	const mapper =[]
-	for(let i = 0; i < strings; i++){
-		mapper.push(<Tuner key={i} string={i+1} tuning={tuning} handler={handleChange}/>)
+	for(let i = strings; i > 0; i--){
+		mapper.push(<Tuner key={i} string={i} tuning={tuning} handler={handleChange}/>)
 	}
 
 	return ( 
@@ -50,14 +51,15 @@ export const Tuners = (props) => {
 
 const mapState = (state) => {
 	return {
-		tuning: state.tuning
+		tuning: state.tuning,
+		strings: state.strings
 	}
 }
 
 const mapDispatch = (dispatch) => {
 	return {
-		handleChange(e, string, tuning){
-			tuning[string - 1] = +e.target.value
+		handleChange(e, string, tuning, strings){
+			tuning[strings - string] = +e.target.value
 			dispatch(editTuning(tuning))
 		}
 	}
