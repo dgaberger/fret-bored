@@ -7,16 +7,18 @@ import {editSelectType, editSelected, toggleSelected, editMajMin} from '../store
  * COMPONENT
  */
 const Controls = (props) => {
-	let notes = ['A','Bb/A#','B','C','Db/C#','D','Eb/D#','E','F','Gb/F#','G','Ab/G#']
-	notes = notes.map((name, idx) => [name, idx])
+	let notesName = ['A','Bb/A#','B','C','Db/C#','D','Eb/D#','E','F','Gb/F#','G','Ab/G#']
+	let notes = notesName.map((name, idx) => [name, idx])
 	const g1 = notes.slice(0,4)
 	const g2 = notes.slice(4,8)
 	const g3 = notes.slice(8,12)
-	const {handleClick, handleType, selectType, handleMajMin, majmin} = props
+	const {handleClick, handleType, selectType, handleMajMin, majmin, selected} = props
+	let notesSelected = selected.map(num => notesName[num])
+	notesSelected = notesSelected.join(', ')
 
 	return (
 		<div>
-			<label>Type:</label>
+			<label>Type: {selectType}</label>
 			<ButtonToolbar>
 				<ButtonGroup>
 					<Button onClick={handleType} value={'Scale'} bsStyle="primary">Scale</Button>
@@ -25,7 +27,7 @@ const Controls = (props) => {
 				</ButtonGroup>
 			</ButtonToolbar>
 
-			<label>Maj/Min</label>
+			<label>Maj/Min: {majmin}</label>
 			<ButtonToolbar>
 				<ButtonGroup>
 					<Button onClick={handleMajMin} value="Major" bsStyle="info">Maj</Button>
@@ -33,7 +35,7 @@ const Controls = (props) => {
 				</ButtonGroup>
 			</ButtonToolbar>
 
-			<label>Note(s)</label>
+			<label>Note(s): {notesSelected}</label>
 			{[g1, g2, g3].map( el => {
 				return (
 					<ButtonToolbar key={el}>
@@ -59,7 +61,8 @@ const mapState = (state) => {
 	return {
 		tuning: state.tuning,
 		selectType: state.selectType,
-		majmin: state.majmin
+		majmin: state.majmin,
+		selected: state.selected
 	}
 }
 

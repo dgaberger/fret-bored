@@ -10,7 +10,7 @@ import Nut from './nut'
  */
 export const FretBoard = (props) => {
 	const strings = props.strings || 6
-	const frets = props.frets || 20
+	const frets = props.frets || 30
 	const initHeight = props.initHeight || 150
 	const tuning = props.tuning || []
 
